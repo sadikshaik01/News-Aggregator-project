@@ -42,7 +42,7 @@ Only **news fetching** is functional.
 ### 🖼️ Homepage
 
 <p align="center">
-  <img src="Frontend/public/screenshort1.png" width="750" />
+  <img src="Frontend/public/Screenshot 2025-12-03 202604.png" width="750" />
 </p>
 
 ---
