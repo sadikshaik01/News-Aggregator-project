@@ -189,11 +189,13 @@ npm install
 ### 5. Configure NewsAPI
 
 1. Sign up for a free API key at [NewsAPI.org](https://newsapi.org/)
-2. Create a `.env` file in the `Frontend` directory:
+2. Create a `.env.local` file in the `Frontend` directory:
 
 ```env
-VITE_NEWS_API_KEY=your_newsapi_key_here
+NEWS_API_KEY=your_newsapi_key_here
 ```
+
+**For Vercel Deployment**: See the [Vercel Deployment Guide](Frontend/VERCEL_DEPLOYMENT_FIX.md) for instructions on setting up environment variables in Vercel.
 
 ## ⚙️ Configuration
 
@@ -293,11 +295,13 @@ Content-Type: application/json
 
 ## 🌍 Environment Variables
 
-### Frontend (.env)
+### Frontend (.env) - For Local Development
 
 ```env
-VITE_NEWS_API_KEY=your_newsapi_key_here
+NEWS_API_KEY=your_newsapi_key_here
 ```
+
+**Note**: When deploying to Vercel, set `NEWS_API_KEY` in Vercel Dashboard > Settings > Environment Variables instead of using a `.env` file.
 
 ### Backend (application.properties)
 
@@ -317,14 +321,30 @@ Already configured in the `application.properties` file.
 - **State Management**: React hooks (useState, useEffect)
 - **Routing**: React Router for navigation
 - **API Integration**: Fetch API for backend communication
+- **Serverless Functions**: Vercel serverless function (`/api/news.js`) acts as a secure proxy to NewsAPI, preventing client-side API key exposure
 
 ## 🔒 Security Considerations
 
 > **⚠️ Important Security Notes:**
 > - Passwords are currently stored in plain text. For production, implement password hashing (BCrypt).
 > - Add JWT or session-based authentication for secure API endpoints.
-> - Never commit `.env` files or sensitive credentials to version control.
+> - Never commit `.env` or `.env.local` files to version control (already in `.gitignore`).
+> - NewsAPI key is now securely stored server-side via Vercel serverless function.
 > - Update CORS configuration for production environments.
+
+## ☁️ Deployment
+
+### Vercel Deployment (Frontend + Serverless Functions)
+
+The frontend is configured for deployment on Vercel with a serverless function that securely handles NewsAPI requests.
+
+**Quick Deploy:**
+1. Push your code to GitHub
+2. Import the repository in [Vercel](https://vercel.com)
+3. Add `NEWS_API_KEY` environment variable in Vercel Settings
+4. Deploy!
+
+📖 **Detailed Guide**: See [VERCEL_DEPLOYMENT_FIX.md](Frontend/VERCEL_DEPLOYMENT_FIX.md) for complete deployment instructions and troubleshooting.
 
 ## 📝 Future Enhancements
 

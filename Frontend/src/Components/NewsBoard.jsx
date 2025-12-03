@@ -9,32 +9,52 @@ const [loading, setLoading] = useState(true);
 const [error, setError] = useState(null);
 
 useEffect(()=>{
-    setLoading(true);
-    setError(null);
-    const apiKey = import.meta.env.VITE_NEWS_API_KEY || 'acd7637a0d124001b1e33db7424fe053';
-    let url =`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${apiKey}`;
-    
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch news. Please try again later.');
+    const fetchNews = async () => {
+      setLoading(true);
+      setError(null);
+      
+      try {
+        // Check if running locally (Vite dev) or on Vercel
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        
+        let url, options = {};
+        
+        if (isLocal) {
+          // For local development: call NewsAPI directly (temporary workaround)
+          const apiKey = import.meta.env.VITE_NEWS_API_KEY || 'acd7637a0d124001b1e33db7424fe053';
+          url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&pageSize=20&apiKey=${apiKey}`;
+          console.log('LOCAL DEV: Fetching from NewsAPI directly');
+        } else {
+          // For production: use Vercel serverless function
+          url = `/api/news?country=us&category=${category}&pageSize=20`;
+          console.log('PRODUCTION: Fetching from serverless function');
         }
-        return response.json();
-      })
-      .then(data => {
-        if (data.articles) {
+        
+        console.log('Fetching news from:', isLocal ? 'NewsAPI (direct)' : url);
+        const response = await fetch(url, options);
+        
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          console.error('API Error:', response.status, errorData);
+          throw new Error(errorData.message || 'Failed to fetch news. Please try again later.');
+        }
+        
+        const data = await response.json();
+        
+        if (data.status === 'ok' && data.articles) {
           setArticles(data.articles);
         } else {
-          setError('No articles found.');
+          setError(data.message || 'No articles found.');
         }
-        setLoading(false);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error("Error fetching news:", error);
         setError(error.message || 'Unable to load news. Please check your connection.');
+      } finally {
         setLoading(false);
-      });
-
+      }
+    };
+    
+    fetchNews();
 },[category])
 
   // Skeleton card component
