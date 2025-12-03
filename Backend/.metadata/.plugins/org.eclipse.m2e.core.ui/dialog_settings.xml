@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Users\shaik\OneDrive\Desktop\zip-art-complete-withoutpaymentgatway\react-first project\OnlineArtGallery-Backend"/>
+			<item value="C:\Users\shaik\OneDrive\Desktop\zip-art-complete-withoutpaymentgatway\react-first project\gallery"/>
+			<item value="C:\Users\shaik\Downloads\Telegram Desktop\sadik-zipfile\gallery-backend"/>
+			<item value="C:\sadik-zipfile\local-cicd-art\OnilineArtGallery-FULL-STACK\gallery-backend"/>
+			<item value="C:\sadik-zipfile\gallery-backend"/>
+			<item value="C:\Users\shaik\OneDrive\Desktop\S215Docker\project docker\Backend\ArtGallery"/>
+			<item value="C:\Users\shaik\Downloads\Telegram Desktop\crud_backend-main"/>
+			<item value="C:\Users\shaik\Downloads\Telegram Desktop\ecommerce-backend"/>
+			<item value="C:\Users\shaik\OneDrive\Pictures\EmployeeManagementSystem (2)"/>
+			<item value="E:\Pruvidvi_Project\Backend\backend.NewAggregator"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>
